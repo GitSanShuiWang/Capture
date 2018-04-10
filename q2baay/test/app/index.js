@@ -6,7 +6,7 @@ import { render } from 'react-dom'
 class Hello extends React.Component {
     render() {
         return (
-            <p>hello world!!!</p>
+            <p>'process.env.NODE_ENV:: '{process.env.NODE_ENV}</p>
         )
     }
 }
