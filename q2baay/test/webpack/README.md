@@ -1,5 +1,10 @@
 #wepack4 配置
 
+#package
+"start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.development.config.js --progress --colors"
+
+cross-env 使命令参数配置适用不同平台开发，统一结构
+
 #webpack开发环境配置说明文档：
 1.设置mode属性所在的开发环境情况。
 
@@ -27,4 +32,4 @@ npm install ... --save-dev
 "webpack-dev-server": "^3.1.1"
 
 6.react热更新，以及部分改变不是浏览器全部刷新【未做。。】
-
+以及redux的state不变
