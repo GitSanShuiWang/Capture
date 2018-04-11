@@ -19,7 +19,6 @@ export default {
         } catch (ex) {
             // 开发环境下提示 error
             if (process.env.NODE_ENV === 'development') {
-                if (__DEV__) {
                 console.error('localStorage.setItem报错, ', ex.message)
             }
         }
