@@ -14,7 +14,8 @@ module.exports = {
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: "bundle.js"
+    filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash
+    chunkFilename: 'js/[name].[chunkhash].js'
   },
 
   module: {
@@ -121,10 +122,12 @@ module.exports = {
   },
 
   devServer: {
+    contentBase: path.resolve(__dirname, '../build'),//URL的根目录。如果不设定的话，默认指向项目根目录
     historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
     inline: true, //实时刷新
     hot: true, // 启用 webpack 的模块热替换特性
-    port: 20001
+    port: 20001,
+    host:'0.0.0.0',
   },
 
   plugins: [

@@ -2,6 +2,7 @@
 
 #package
 "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.development.config.js --progress --colors"
+"dev-build" 使用router则须本地服务启动，打包后不可使用路由
 
 cross-env 使命令参数配置适用不同平台开发，统一结构
 
@@ -10,13 +11,15 @@ cross-env 使命令参数配置适用不同平台开发，统一结构
 
 2.设置context对entry和loader的路径影响[参考context说明](https://juejin.im/post/5a10d9fe51882554bd50a5d3)
 
-3.babel 进行js,jsx的编译，谨记需配置.bablrc中的"presets": ["react", "env"]，使用env对react进行识别解析编译。
+3.babel 进行js,jsx的编译，谨记需配置.bablrc中的"presets":
+"presets": ["@babel/preset-env", "@babel/preset-react","@babel/preset-stage-0"]
+，使用env对react进行解析编译,stage-0使项目支持最新的提案。
 npm install ... --save-dev
-"babel-cli": "^6.26.0",
-"babel-core": "^6.26.0",
-"babel-loader": "^7.1.4",
-"babel-preset-env": "^1.6.1",
-"babel-preset-react": "^6.24.1",
+"@babel/core": "^7.0.0-beta.44",
+"@babel/preset-env": "^7.0.0-beta.44",
+"@babel/preset-react": "^7.0.0-beta.44",
+"@babel/preset-stage-0": "^7.0.0-beta.44",
+"babel-loader": "^8.0.0-beta",
 
 4.图片、文件、字体、样式 的loader
 
@@ -31,5 +34,41 @@ new webpack.HotModuleReplacementPlugin(),
 npm install ... --save-dev
 "webpack-dev-server": "^3.1.1"
 
-6.react热更新，以及部分改变不是浏览器全部刷新【未做。。】
+6.react热更新，以及部分改变不是浏览器全部刷新
 以及redux的state不变
+react模块热替换，不刷新浏览器：：
+(1)
+devServer: {
+    hot: true
+}
+
+(2)
+plugins:[
+     new webpack.HotModuleReplacementPlugin()
+]
+
+(3) 用了react-hot-loader的hot属性可以忽略此步骤，
+如果使用AppContainer属性，配置可[参考](https://github.com/gaearon/react-hot-loader)
+index.js中：(使页面不刷新)
+if (module.hot) {
+    module.hot.accept()
+}
+
+(4)
+当模块热替换的时候，state会重置。
+[参考官方](https://github.com/gaearon/react-hot-loader)的hot配置
+
+7.App文件下的README.md进行redux和router的引入
+
+8.按需加载
+(1)
+(2)
+(3)
+
+9.缓存
+https://webpack.js.org/configuration/output/#output-filename
+output: {
+  path: path.resolve(__dirname, '../build'),
+  filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash
+  chunkFilename: 'js/[name].[chunkhash].js'
+},
