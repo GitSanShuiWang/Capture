@@ -61,9 +61,33 @@ if (module.hot) {
 7.App文件下的README.md进行redux和router的引入
 
 8.按需加载
-(1)
-(2)
-(3)
+(1)npm install bundle-loader --save-dev
+
+(2)新建Bundle.js
+
+(3)改造路由器
+
+note::
+但是你可能发现，名字都是0.bundle.js这样子的，这分不清楚是哪个页面的js呀！
+
+我们修改下webpack.dev.config.js,加个chunkFilename。chunkFilename是除了entry定义的入口js之外的js~
+
+    output: {
+        path: path.join(__dirname, './dist'),
+        filename: 'bundle.js',
+        chunkFilename: '[name].js'
+    }
+现在你运行发现名字变成home.js,这样的了。棒棒哒！
+
+那么问题来了home是在哪里设置的？webpack怎么知道他叫home？
+
+其实在这里我们定义了，router.js里面
+
+import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
+
+看到没。这里有个name=home。嘿嘿。
+
+但是，如果有些组件加载不需要进行按需加载，则正常方式引入，不用按照上边进行加载即可,便会打包进filename主文件
 
 9.缓存
 https://webpack.js.org/configuration/output/#output-filename
