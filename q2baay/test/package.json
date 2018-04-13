@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack/webpack.development.config.js --progress --color",
     "dev-build": "cross-env webpack --config webpack/webpack.development.config.js --progress --color",
-    "build":"cross-env NODE_ENV=production webpack --config webpack/webpack.production.config.js --progress --color"
+    "build": "cross-env NODE_ENV=production webpack --config webpack/webpack.production.config.js --progress --color"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "@babel/preset-react": "^7.0.0-beta.44",
     "@babel/preset-stage-0": "^7.0.0-beta.44",
     "babel-loader": "^8.0.0-beta",
+    "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^5.1.4",
     "css-loader": "^0.28.11",
     "file-loader": "^1.1.11",

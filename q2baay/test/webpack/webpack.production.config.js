@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
   //设置环境模式为开发，业务逻辑通过process.env.NODE_ENV获取当前的运行环境
@@ -13,9 +14,9 @@ module.exports = {
   entry: path.resolve(__dirname, "../app/index.js"),
   //开发时，打包后文件
   output: {
-    path: path.resolve(__dirname, '../build'),
-    filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[name].[chunkhash].js'
+    path: path.resolve(__dirname, "../build"),
+    filename: "js/[name].[chunkhash].js",
+    chunkFilename: "demandJs/[name].[chunkhash].js"
   },
 
   module: {
@@ -134,25 +135,42 @@ module.exports = {
       //'SET_URL': JSON.stringify("http://dev.example.com")
     }),
 
-    new webpack.optimization.splitChunks({
+    new CleanWebpackPlugin(["build/*"], {
+      root: path.resolve(__dirname, "..")
+    })
+
+  ],
+
+  optimization: {
+    splitChunks: {
       chunks: "async",
       minSize: 30000,
       minChunks: 1,
       maxAsyncRequests: 5,
       maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
+      automaticNameDelimiter: "~",
       name: true,
       cacheGroups: {
-          vendors: {
-              test: /[\\/]node_modules[\\/]/,
-              priority: -10
-          },
-          default: {
-              minChunks: 2,
-              priority: -20,
-              reuseExistingChunk: true
-          }
+        commons: {
+          test: /[\\/]components[\\/]/, 
+          name: "chunkJs/commons",
+          chunks: "initial",
+          minChunks: 2,
+          priority: 10,
+          enforce: true
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: "chunkJs/vendors",
+          chunks: "all",
+          priority: 10,
+          enforce: true
+        }
       }
-    })
-  ]
-};
+    },
+    runtimeChunk: {
+      name: "chunkJs/manifest"
+    }
+  }
+
+}
