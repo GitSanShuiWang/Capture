@@ -96,3 +96,21 @@ output: {
   filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash
   chunkFilename: 'js/[name].[chunkhash].js'
 },
+
+10.
+
+
+
+#生产环境配置
+
+一、
+
+(1)先删除webpack-dev-server相关的东西~
+
+(2)devtool的值改成cheap-module-source-map
+
+(3)刚才说的hash改成chunkhash
+
+(4)mode改成production的值
+
+二、提取公共部分

@@ -4,17 +4,17 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   //设置环境模式为开发，业务逻辑通过process.env.NODE_ENV获取当前的运行环境
-  mode: "development",
+  mode: "production",
   //使用默认配置，README.md中有link说明
   context: path.resolve(__dirname),
-  /*错误信息是不是提示的很详细,我们在srouce里面能看到我们写的代码，也能打断点调试哦~*/
-  devtool: "inline-source-map",
+
+  devtool: "source-map",
   //入口文件
   entry: path.resolve(__dirname, "../app/index.js"),
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
+    filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[name].[chunkhash].js'
   },
 
@@ -121,15 +121,6 @@ module.exports = {
     extensions: [".js", ".jsx"]
   },
 
-  devServer: {
-    contentBase: path.resolve(__dirname, '../build'),//URL的根目录。如果不设定的话，默认指向项目根目录
-    historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
-    inline: true, //实时刷新
-    hot: true, // 启用 webpack 的模块热替换特性
-    port: 20001,
-    host:'0.0.0.0',
-  },
-
   plugins: [
     new HtmlWebpackPlugin({
       title: "Webpack4-GO",
@@ -137,13 +128,31 @@ module.exports = {
       favicon: "../public/favicon.ico"
     }),
 
-    //永远不要在生产环境(production)下启用 HMR,即没有devServer出现
-    new webpack.HotModuleReplacementPlugin(),
-
     new webpack.DefinePlugin({
       // 可在业务 js 代码中使用 __DEV__ 判断是否是dev模式（dev模式下可以提示错误、测试报告等, production模式不提示）
       // __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
       //'SET_URL': JSON.stringify("http://dev.example.com")
+    }),
+
+    new webpack.optimization.splitChunks({
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
+      cacheGroups: {
+          vendors: {
+              test: /[\\/]node_modules[\\/]/,
+              priority: -10
+          },
+          default: {
+              minChunks: 2,
+              priority: -20,
+              reuseExistingChunk: true
+          }
+      }
     })
   ]
 };
