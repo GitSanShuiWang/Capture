@@ -152,7 +152,7 @@ module.exports = {
       name: true,
       cacheGroups: {
         commons: {
-          test: /[\\/]components[\\/]/, 
+          test: /[\\/]components[\\/]/,
           name: "chunkJs/commons",
           chunks: "initial",
           minChunks: 2,
