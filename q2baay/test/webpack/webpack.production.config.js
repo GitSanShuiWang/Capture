@@ -187,7 +187,7 @@ module.exports = {
           enforce: true
         },
         styles: {
-          name: 'styles',
+          name: 'css/styles',
           test: /\.css$/,
           chunks: 'all',
           enforce: true
