@@ -18,7 +18,7 @@ class Hello extends React.Component {
       <img src={imgTest}/>
       <p>'process.env.NODE_ENV:: ' {process.env.NODE_ENV}</p>
 
-      <div>当前计数为{this.props.counter.count}</div>
+      <div>{this.props.counter.count}</div>
       <button onClick={() => this.props.increment()}>自增
       </button>
       <button onClick={() => this.props.decrement()}>自减

@@ -89,15 +89,17 @@ import Home from 'bundle-loader?lazy&name=home!pages/Home/Home';
 
 但是，如果有些组件加载不需要进行按需加载，则正常方式引入，不用按照上边进行加载即可,便会打包进filename主文件
 
+
 9.缓存
 https://webpack.js.org/configuration/output/#output-filename
+用户第一次访问首页，下载了home.js，第二次访问又下载了home.js
 output: {
   path: path.resolve(__dirname, '../build'),
   filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash
   chunkFilename: 'js/[name].[chunkhash].js'
 },
 
-10.
+10.css自动前缀
 
 
 
@@ -114,3 +116,57 @@ output: {
 (4)mode改成production的值
 
 二、提取公共部分
+optimization
+-splitChunks
+-runtimeChunk //管理所有模块的交互
+
+每次修改组件代码,都会导致vendors.[hash].js和runtimeChunk的名字改变，那我们提取出来的意义也就没了。
+   output: {
+        path: path.join(__dirname, './dist'),
+        filename: '[name].[chunkhash].js', //这里应该用chunkhash替换hash
+        chunkFilename: '[name].[chunkhash].js'
+    }
+
+
+
+
+三、提取CSS
+https://webpack.js.org/plugins/mini-css-extract-plugin/#minimizing-for-production
+optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    } 为每个样式文件新建文件
+    
+四、css自动前缀
+
+五、优化缓存
+随处修改组件之类的代码会导致提取的venders改变hash导致文件名改变，就没了缓存的意义
+new webpack.HashedModuleIdsPlugin()
+
+
+注意：：
+chunkFilename: '[name].js' 解决按需加载名称无法分辨的问题 0.build.js ... 1.build.....
+output: {
+    path: path.join(__dirname, './dist'),
+    filename: '[name].[hash].js', //这里应该用chunkhash替换hash
+    chunkFilename: '[name].js'
+}
+
+chunkFilename: 'js/[name].[chunkhash].js' 解决第一次访问加载home.js第二次仍然还要加载的问题，解决了缓存。
+内容未变不进行再次加载了、、、
+output: {
+  path: path.resolve(__dirname, '../build'),
+  filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash
+  chunkFilename: 'js/[name].[chunkhash].js'
+},
+
+随处修改组件之类的代码会导致提取的venders改变hash导致文件名改变，就没了缓存的意义
+filename: 'js/[name].[chunkhash].js',
+new webpack.HashedModuleIdsPlugin()

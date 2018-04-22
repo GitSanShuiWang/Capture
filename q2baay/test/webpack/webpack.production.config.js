@@ -1,7 +1,10 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
+const path = require("path")
+const webpack = require("webpack")
+const HtmlWebpackPlugin = require("html-webpack-plugin")
+const CleanWebpackPlugin = require("clean-webpack-plugin")
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
   //设置环境模式为开发，业务逻辑通过process.env.NODE_ENV获取当前的运行环境
@@ -15,8 +18,8 @@ module.exports = {
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, "../build"),
-    filename: "js/[name].[chunkhash].js",
-    chunkFilename: "demandJs/[name].[chunkhash].js"
+    filename: "js/[name].[chunkhash:8].js",
+    chunkFilename: "demandJs/[name].[chunkhash:8].js"
   },
 
   module: {
@@ -36,7 +39,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: "style-loader"
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader"
@@ -47,7 +50,7 @@ module.exports = {
         test: /\.less$/,
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader" // translates CSS into CommonJS
@@ -61,7 +64,7 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: "css-loader" // translates CSS into CommonJS
@@ -72,15 +75,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(eot|ttf|woff|woff2)$/,
-        loader: "url-loader",
-        options: {
-          limit: 8192,
-          name: "fonts/[name]-[hash:8].[ext]"
-        }
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg|bmp)$/i,
         use: [
           {
             loader: "url-loader",
@@ -113,7 +108,15 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        loader: "url-loader",
+        options: {
+          limit: 8192,
+          name: "fonts/[name]-[hash:8].[ext]"
+        }
+      },
     ]
   },
 
@@ -123,6 +126,10 @@ module.exports = {
   },
 
   plugins: [
+    
+    // webpack 内置的 banner-plugin
+    new webpack.BannerPlugin("Copyright by 768188667@qq.com"),
+
     new HtmlWebpackPlugin({
       title: "Webpack4-GO",
       template: "../app/index.temp.html",
@@ -137,7 +144,20 @@ module.exports = {
 
     new CleanWebpackPlugin(["build/*"], {
       root: path.resolve(__dirname, "..")
-    })
+    }),
+    
+    new webpack.HashedModuleIdsPlugin(),
+
+    new MiniCssExtractPlugin({
+      // Options similar to the same options in webpackOptions.output
+      // both options are optional
+      filename: "css/[name].[hash].css",
+      chunkFilename: "css/[id].[hash].css"
+    }),
+
+    new UglifyJsPlugin({
+      sourceMap: true
+    }),
 
   ],
 
@@ -165,12 +185,26 @@ module.exports = {
           chunks: "all",
           priority: 10,
           enforce: true
+        },
+        styles: {
+          name: 'styles',
+          test: /\.css$/,
+          chunks: 'all',
+          enforce: true
         }
       }
     },
     runtimeChunk: {
       name: "chunkJs/manifest"
-    }
+    },
+    minimizer: [
+      new UglifyJsPlugin({
+        cache: true,
+        parallel: true,
+        sourceMap: true // set to true if you want JS source maps
+      }),
+      new OptimizeCSSAssetsPlugin({})
+    ]
   }
 
 }

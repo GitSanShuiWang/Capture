@@ -14,8 +14,8 @@ module.exports = {
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, '../build'),
-    filename: 'js/[name].[hash].js',   //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
-    chunkFilename: 'js/[name].[chunkhash].js'
+    filename: 'js/[name].[hash:8].js',   //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
+    chunkFilename: 'js/[name].[chunkhash:8].js'
   },
 
   module: {
@@ -71,15 +71,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(eot|ttf|woff|woff2)$/,
-        loader: "url-loader",
-        options: {
-          limit: 8192,
-          name: "fonts/[name]-[hash:8].[ext]"
-        }
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg|bmp)$/i,
         use: [
           {
             loader: "url-loader",
@@ -112,7 +104,15 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.(eot|ttf|woff|woff2)$/,
+        loader: "url-loader",
+        options: {
+          limit: 8192,
+          name: "fonts/[name]-[hash:8].[ext]"
+        }
+      },
     ]
   },
 
