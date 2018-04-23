@@ -4,7 +4,8 @@ import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
 import Bundle from './Bundle'
 
 import Hello from 'bundle-loader?lazy&name=hello!../containers/Hello'
-import Test from '../containers/Test'
+// import Test from '../containers/Test'
+import Test from 'bundle-loader?lazy&name=test!../containers/Test'
 
 import Loading from '../components/Loading'
 

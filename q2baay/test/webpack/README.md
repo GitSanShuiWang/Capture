@@ -142,7 +142,7 @@ optimization: {
           enforce: true
         }
       }
-    } 为每个样式文件新建文件
+    } 跟vender一样，为.css后缀文件内容集合在一个文件中，提取公共css
     
 四、css自动前缀
 

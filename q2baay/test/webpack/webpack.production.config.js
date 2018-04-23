@@ -42,7 +42,10 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader"
+            loader: "css-loader",
+            options: {
+              sourceMap: true
+            }
           }
         ]
       },
@@ -53,10 +56,16 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
+            options: {
+              sourceMap: true
+            }
           },
           {
-            loader: "less-loader" // compiles Less to CSS
+            loader: "less-loader", // compiles Less to CSS
+            options: {
+              sourceMap: true
+            }
           }
         ]
       },
@@ -67,10 +76,16 @@ module.exports = {
             loader: MiniCssExtractPlugin.loader,
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
+            options: {
+              sourceMap: true
+            }
           },
           {
-            loader: "sass-loader" // compiles Sass to CSS
+            loader: "sass-loader", // compiles Sass to CSS
+            options: {
+              sourceMap: true
+            }
           }
         ]
       },
@@ -152,7 +167,7 @@ module.exports = {
       // Options similar to the same options in webpackOptions.output
       // both options are optional
       filename: "css/[name].[hash].css",
-      chunkFilename: "css/[id].[hash].css"
+      chunkFilename: "css/[name].[hash].css"
     }),
 
     new UglifyJsPlugin({
@@ -184,12 +199,6 @@ module.exports = {
           name: "chunkJs/vendors",
           chunks: "all",
           priority: 10,
-          enforce: true
-        },
-        styles: {
-          name: 'css/styles',
-          test: /\.css$/,
-          chunks: 'all',
           enforce: true
         }
       }
