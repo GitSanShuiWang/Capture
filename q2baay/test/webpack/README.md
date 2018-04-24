@@ -118,7 +118,7 @@ output: {
 二、提取公共部分
 optimization
 -splitChunks
--runtimeChunk //管理所有模块的交互
+-runtimeChunk //管理所有模块的(按需)交互，当非加入按需模块的组件code改变runtime的hash不会改变。
 
 每次修改组件代码,都会导致vendors.[hash].js和runtimeChunk的名字改变，那我们提取出来的意义也就没了。
    output: {
@@ -130,7 +130,7 @@ optimization
 
 
 
-三、提取CSS
+三、从js抽取CSS
 https://webpack.js.org/plugins/mini-css-extract-plugin/#minimizing-for-production
 optimization: {
     splitChunks: {
@@ -143,8 +143,17 @@ optimization: {
         }
       }
     } 跟vender一样，为.css后缀文件内容集合在一个文件中，提取公共css
-    
+
+从js中提取css到css文件，notes::
+1.MiniCssExtractPlugin 进行抽取
+2.minimizer 进行压缩
+3.cacheGroups ->> styles 对指定的.css或.scss文件进行提取为公共的css
+4.router路由中不进行按需加载的组件，会把样式搞到main.000.css中
+5.按需加载的展示组件会生成一个组件name.hash的css文件
+5.css改变js文件的hash也会跟着变
+
 四、css自动前缀
+
 
 五、优化缓存
 随处修改组件之类的代码会导致提取的venders改变hash导致文件名改变，就没了缓存的意义

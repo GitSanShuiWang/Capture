@@ -141,7 +141,7 @@ module.exports = {
   },
 
   plugins: [
-    
+
     // webpack 内置的 banner-plugin
     new webpack.BannerPlugin("Copyright by 768188667@qq.com"),
 
@@ -160,14 +160,14 @@ module.exports = {
     new CleanWebpackPlugin(["build/*"], {
       root: path.resolve(__dirname, "..")
     }),
-    
+
     new webpack.HashedModuleIdsPlugin(),
 
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
       // both options are optional
-      filename: "css/[name].[hash].css",
-      chunkFilename: "css/[name].[hash].css"
+      filename: "css/[name].[chunkhash:8].css",
+      chunkFilename: "css/[name].[chunkhash:8].css"
     }),
 
     new UglifyJsPlugin({
