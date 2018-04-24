@@ -6,8 +6,8 @@ import Bundle from './Bundle'
 import Hello from 'bundle-loader?lazy&name=hello!../containers/Hello'
 
 //没有按需加载
-import Test from '../containers/Test'
-// import Test from 'bundle-loader?lazy&name=test!../containers/Test'
+// import Test from '../containers/Test'
+import Test from 'bundle-loader?lazy&name=test!../containers/Test'
 
 import Loading from '../components/Loading'
 
