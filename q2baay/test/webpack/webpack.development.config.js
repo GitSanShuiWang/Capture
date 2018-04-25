@@ -10,7 +10,7 @@ module.exports = {
   /*错误信息是不是提示的很详细,我们在srouce里面能看到我们写的代码，也能打断点调试哦~*/
   devtool: "inline-source-map",
   //入口文件
-  entry: path.resolve(__dirname, "../app/index.js"),
+  entry: ["@babel/polyfill",path.resolve(__dirname, "../app/index.js")],
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, '../build'),
@@ -39,7 +39,8 @@ module.exports = {
           },
           {
             loader: "css-loader"
-          }
+          },
+          'postcss-loader'
         ]
       },
       {
@@ -53,7 +54,8 @@ module.exports = {
           },
           {
             loader: "less-loader" // compiles Less to CSS
-          }
+          },
+          'postcss-loader'
         ]
       },
       {
@@ -67,7 +69,8 @@ module.exports = {
           },
           {
             loader: "sass-loader" // compiles Sass to CSS
-          }
+          },
+          'postcss-loader'
         ]
       },
       {

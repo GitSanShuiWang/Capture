@@ -14,7 +14,7 @@ module.exports = {
 
   devtool: "source-map",
   //入口文件
-  entry: path.resolve(__dirname, "../app/index.js"),
+  entry: ["@babel/polyfill",path.resolve(__dirname, "../app/index.js")],
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, "../build"),

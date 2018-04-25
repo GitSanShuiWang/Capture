@@ -112,6 +112,9 @@ module.exports = {
     }
 }
 
+11.加入 babel-plugin-transform-runtime 和 babel-polyfill
+
+
 
 #生产环境配置
 
