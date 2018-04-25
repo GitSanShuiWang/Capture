@@ -46,7 +46,8 @@ module.exports = {
             options: {
               sourceMap: true
             }
-          }
+          },
+          'postcss-loader'
         ]
       },
       {
@@ -66,7 +67,8 @@ module.exports = {
             options: {
               sourceMap: true
             }
-          }
+          },
+          'postcss-loader'
         ]
       },
       {
@@ -86,7 +88,8 @@ module.exports = {
             options: {
               sourceMap: true
             }
-          }
+          },
+          'postcss-loader'
         ]
       },
       {

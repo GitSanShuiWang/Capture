@@ -100,7 +100,17 @@ output: {
 },
 
 10.css自动前缀
+npm install --save-dev  postcss-loader
+npm install --save-dev  postcss-cssnext
+npm install postcss-import
 
+postcss.config.js
+module.exports = {
+    plugins: {
+        'postcss-import': {},
+        'postcss-cssnext': {}
+    }
+}
 
 
 #生产环境配置
@@ -151,8 +161,6 @@ optimization: {
 4.router路由中不进行按需加载的组件，会把样式搞到main.000.css中
 5.按需加载的展示组件会生成一个组件name.hash的css文件
 5.css改变js文件的hash也会跟着变
-
-四、css自动前缀
 
 
 五、优化缓存
