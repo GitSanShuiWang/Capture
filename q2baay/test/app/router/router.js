@@ -23,7 +23,7 @@ const getRouter = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/" component={createComponent(Hello)} />
-      <Route path="/Test" component={Test} />
+      <Route path="/Test" component={createComponent(Test)} />
     </Switch>
   </BrowserRouter>
 )
