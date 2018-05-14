@@ -4,7 +4,7 @@ import './test.css'
 import './test.scss'
 import '../Test/styles.css'
 import imgTest from './test.png'
-import {increment, decrement, reset} from './action'
+import {increment, decrement, reset,callApiTest} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
 
@@ -19,13 +19,15 @@ class Hello extends React.Component {
       <img src={imgTest}/>
       <p className='text'>'process.env.NODE_ENV:: ' {process.env.NODE_ENV}</p>
 
-      <div>{this.props.counter.count}</div>
+      <div>count:: {this.props.counter.count}</div>
       <button onClick={() => this.props.increment()}>自增
       </button>
       <button onClick={() => this.props.decrement()}>自减
       </button>
       <button onClick={() => this.props.reset()}>重置
       </button>
+
+      <button onClick={(e) => this.props.callApiTest()}>call api test,set count:: 5.</button>
     </div>)
   }
 }

@@ -1,15 +1,15 @@
 import fetch from 'cross-fetch'
-window.Cookies = require('js-cookie')
+// window.Cookies = require('js-cookie')
 
 export const post = async ({ url, body, success, failure, dispatch }) => {
-  const aspenJwt = window.Cookies.get('aspen-jwt')
+  // const aspenJwt = window.Cookies.get('aspen-jwt')
   try {
     const res = await fetch(url, {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        'jwt': aspenJwt || ''
+        // 'jwt': aspenJwt || ''
       },
       body: JSON.stringify(body),
     })
@@ -22,14 +22,14 @@ export const post = async ({ url, body, success, failure, dispatch }) => {
 }
 
 export const get = async ({ url, success, failure, dispatch }) => {
-  const aspenJwt = window.Cookies.get('aspen-jwt')
+  // const aspenJwt = window.Cookies.get('aspen-jwt')
   try {
     const res = await fetch(url, {
       method: 'GET',
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
-        'jwt': aspenJwt || ''
+        // 'jwt': aspenJwt || ''
       },
     })
     const data = await res.json()
