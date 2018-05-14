@@ -12,6 +12,3 @@ redux-thunk作为中间件
 -（待优化）按需加载bundle,react-router-dom官方已出新方案
 
 #v1/thunk-api分支，整合一个thunk的中间件
-
-#
-#
