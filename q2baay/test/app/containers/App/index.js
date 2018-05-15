@@ -1,6 +1,8 @@
 import React from 'react'
 import { hot } from 'react-hot-loader'
-import getRouter from '../../router/router'
+// import getRouter from '../../router/router'
+
+import getRouter from '../../router/routerNewSplit'
 
 class App extends React.Component {
     render() {
