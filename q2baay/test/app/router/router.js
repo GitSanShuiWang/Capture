@@ -1,5 +1,6 @@
 import React from 'react'
-import {BrowserRouter, Route, Switch, Link} from 'react-router-dom'
+import {BrowserRouter, Router, Route, Switch, Link} from 'react-router-dom'
+import history from './history'
 
 import Bundle from './Bundle'
 
