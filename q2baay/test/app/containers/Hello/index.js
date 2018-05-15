@@ -7,6 +7,7 @@ import imgTest from './test.png'
 import {increment, decrement, reset,callApiTest} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
+import {withRouter} from "react-router-dom"
 
 class Hello extends React.Component {
 
@@ -28,11 +29,14 @@ class Hello extends React.Component {
       </button>
       <br/>
       <button onClick={(e) => this.props.callApiTest()}>call api test,set count:: 5.</button>
+      <br />
+      <button onClick={() => this.props.history.push("/Test")}>Test Page</button>
     </div>)
   }
 }
 
 const enhance = compose(
+  withRouter,
   connect((state) => ({
     counter: state.counter
   }), {
