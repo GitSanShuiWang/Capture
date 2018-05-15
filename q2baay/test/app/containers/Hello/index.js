@@ -26,7 +26,7 @@ class Hello extends React.Component {
       </button>
       <button onClick={() => this.props.reset()}>重置
       </button>
-
+      <br/>
       <button onClick={(e) => this.props.callApiTest()}>call api test,set count:: 5.</button>
     </div>)
   }
@@ -38,7 +38,8 @@ const enhance = compose(
   }), {
     increment,
     decrement,
-    reset
+    reset,
+    callApiTest
   })
 )
 

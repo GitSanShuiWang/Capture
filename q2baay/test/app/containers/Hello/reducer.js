@@ -23,8 +23,7 @@ export default function reducer(state = initState, action) {
         case RESET:
             return {count: 0};
         case CALL_API_TEST_SUCCESS:
-        debugger
-            return {count: 5};
+            return {count: action.data.count};
         default:
             return state
     }
