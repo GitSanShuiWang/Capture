@@ -4,12 +4,14 @@ import { hot } from 'react-hot-loader'
 
 import getRouter from '../../router/routerNewSplit'
 
+import {Router} from 'react-router-dom'
+import history from '../../router/history'
 class App extends React.Component {
     render() {
         return (
-          <div>
+          <Router history={history}>
             {getRouter()}
-          </div>
+          </Router>
         )
     }
 }
