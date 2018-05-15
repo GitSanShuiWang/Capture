@@ -4,7 +4,7 @@ import './test.css'
 import './test.scss'
 import '../Test/styles.css'
 import imgTest from './test.png'
-import {increment, decrement, reset,callApiTest} from './action'
+import {increment, decrement, reset} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
 
@@ -38,8 +38,7 @@ const enhance = compose(
   }), {
     increment,
     decrement,
-    reset,
-    callApiTest
+    reset
   })
 )
 
