@@ -4,7 +4,7 @@ import './test.css'
 import './test.scss'
 import '../Test/styles.css'
 import imgTest from './test.png'
-import {increment, decrement, reset} from './action'
+import {increment, decrement, reset,callApiTest} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
 import {withRouter} from "react-router-dom"
@@ -29,6 +29,8 @@ class Hello extends React.Component {
       </button>
       <br />
       <button onClick={() => this.props.history.push("/Test")}>Test Page</button>
+      <br />
+      <button onClick={() => this.props.callApiTest()}>callApiTest axios, count:: 5.</button>
     </div>)
   }
 }
@@ -40,7 +42,8 @@ const enhance = compose(
   }), {
     increment,
     decrement,
-    reset
+    reset,
+    callApiTest
   })
 )
 
