@@ -26,8 +26,6 @@ class Hello extends React.Component {
       </button>
       <button onClick={() => this.props.reset()}>重置
       </button>
-      <br/>
-      <button onClick={(e) => this.props.callApiTest()}>call api test,set count:: 5.</button>
       <br />
       <button onClick={() => this.props.history.push("/Test")}>Test Page</button>
     </div>)
