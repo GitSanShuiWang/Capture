@@ -7,7 +7,6 @@ import imgTest from './test.png'
 import {increment, decrement, reset,callApiTest} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
-import {withRouter} from "react-router-dom"
 
 class Hello extends React.Component {
 
@@ -20,7 +19,7 @@ class Hello extends React.Component {
       <img src={imgTest}/>
       <p className='text'>'process.env.NODE_ENV:: ' {process.env.NODE_ENV}</p>
 
-      <div>{this.props.counter.count}</div>
+      <div>count:: {this.props.counter.count}</div>
       <button onClick={() => this.props.increment()}>自增
       </button>
       <button onClick={() => this.props.decrement()}>自减
@@ -36,7 +35,6 @@ class Hello extends React.Component {
 }
 
 const enhance = compose(
-  withRouter,
   connect((state) => ({
     counter: state.counter
   }), {
