@@ -7,7 +7,7 @@ import imgTest from './test.png'
 import {increment, decrement, reset} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
-
+import SubToHistory from './subPage/SubToHistory'
 class Hello extends React.Component {
 
   constructor(props) {
@@ -28,6 +28,8 @@ class Hello extends React.Component {
       </button>
       <br />
       <button onClick={() => this.props.history.push("/Test")}>Test Page</button>
+      
+      <SubToHistory />
     </div>)
   }
 }
