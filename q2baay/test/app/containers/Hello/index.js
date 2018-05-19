@@ -7,7 +7,8 @@ import imgTest from './test.png'
 import {increment, decrement, reset,callApiTest} from './action'
 import { compose } from 'redux'
 import {connect} from 'react-redux'
-
+import SubToHistory from './subPage/SubToHistory'
+import history from '../../router/history'
 class Hello extends React.Component {
 
   constructor(props) {
@@ -30,6 +31,9 @@ class Hello extends React.Component {
       <button onClick={() => this.props.history.push("/Test")}>Test Page</button>
       <br />
       <button onClick={() => this.props.callApiTest()}>callApiTest axios, count:: 5.</button>
+      <button onClick={() => history.push("/Test")}>Test Page</button>
+
+      <SubToHistory />
     </div>)
   }
 }

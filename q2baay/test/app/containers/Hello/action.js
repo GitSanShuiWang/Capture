@@ -5,7 +5,10 @@ export const CALL_API_TEST_REQUEST = 'CALL_API_TEST_REQUEST'
 export const CALL_API_TEST_SUCCESS = 'CALL_API_TEST_SUCCESS'
 export const CALL_API_TEST_FAIL = 'CALL_API_TEST_FAIL'
 
+import history from '../../router/history'
+
 export function increment() {
+    history.push('/Test')
     return {type: INCREMENT}
 }
 
