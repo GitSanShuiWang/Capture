@@ -18,7 +18,7 @@ export default function reducer(state = initState, action) {
             };
         case DECREMENT:
             return {
-                count: state.count - 1
+                count: state.count - 2
             };
         case RESET:
             return {count: 0};
