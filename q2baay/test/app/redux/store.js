@@ -8,4 +8,11 @@ let store = process.env.NODE_ENV === "development"
     ? createStore(combineReducers, applyMiddleware(thunk,logger))
     : createStore(combineReducers, applyMiddleware(thunk));
 
+if (module.hot) {
+    module.hot.accept("./reducers", () => {
+        const nextCombineReducers = require("./reducers").default;
+        store.replaceReducer(nextCombineReducers);
+    });
+}     
+
 export default store;
