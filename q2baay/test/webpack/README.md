@@ -58,6 +58,22 @@ if (module.hot) {
 当模块热替换的时候，state会重置。
 [参考官方](https://github.com/gaearon/react-hot-loader)的hot配置
 
+(5)
+今天突然发现，当修改reducer代码的时候，页面会整个刷新，而不是局部刷新唉。
+
+这不行，就去查了webpack文档，果然是要配置的。
+
+代码修改起来也简单,增加一段监听reducers变化，并替换的代码。
+
+src/redux/store.js
+
+if (module.hot) {
+    module.hot.accept("./reducers", () => {
+        const nextCombineReducers = require("./reducers").default;
+        store.replaceReducer(nextCombineReducers);
+    });
+}
+
 7.App文件下的README.md进行redux和router的引入
 
 8.按需加载
