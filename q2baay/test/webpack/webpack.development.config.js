@@ -10,12 +10,12 @@ module.exports = {
   /*错误信息是不是提示的很详细,我们在srouce里面能看到我们写的代码，也能打断点调试哦~*/
   devtool: "inline-source-map",
   //入口文件
-  entry: ["@babel/polyfill",path.resolve(__dirname, "../app/index.js")],
+  entry: ["@babel/polyfill", path.resolve(__dirname, "../app/index.js")],
   //开发时，打包后文件
   output: {
-    path: path.resolve(__dirname, '../build'),
-    filename: 'js/[name].[hash:8].js',   //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
-    chunkFilename: 'js/[name].[chunkhash:8].js'
+    path: path.resolve(__dirname, "../build"),
+    filename: "js/[name].[hash:8].js", //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
+    chunkFilename: "js/[name].[chunkhash:8].js"
   },
 
   module: {
@@ -40,7 +40,7 @@ module.exports = {
           {
             loader: "css-loader"
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
@@ -55,7 +55,7 @@ module.exports = {
           {
             loader: "less-loader" // compiles Less to CSS
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
@@ -70,11 +70,11 @@ module.exports = {
           {
             loader: "sass-loader" // compiles Sass to CSS
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
-        test: /\.(jpe?g|png|gif|svg|bmp)$/i,
+        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
           {
             loader: "url-loader",
@@ -86,25 +86,27 @@ module.exports = {
           {
             loader: "image-webpack-loader",
             options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
               mozjpeg: {
-               progressive: true,
-               quality: 65
-             },
-             // optipng.enabled: false will disable optipng
-             optipng: {
-               enabled: false,
-             },
-             pngquant: {
-               quality: '65-90',
-               speed: 4
-             },
-             gifsicle: {
-               interlaced: false,
-             },
-             // the webp option will enable WEBP
-             webp: {
-               quality: 75
-             }
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: "65-90",
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
             }
           }
         ]
@@ -116,7 +118,7 @@ module.exports = {
           limit: 8192,
           name: "fonts/[name]-[hash:8].[ext]"
         }
-      },
+      }
     ]
   },
 
@@ -126,12 +128,12 @@ module.exports = {
   },
 
   devServer: {
-    contentBase: path.resolve(__dirname, '../build'),//URL的根目录。如果不设定的话，默认指向项目根目录
+    contentBase: path.resolve(__dirname, "../build"), //URL的根目录。如果不设定的话，默认指向项目根目录
     historyApiFallback: true, //不跳转，在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
     inline: true, //实时刷新
     hot: true, // 启用 webpack 的模块热替换特性
     port: 20001,
-    host:'0.0.0.0',
+    host: "0.0.0.0"
   },
 
   plugins: [

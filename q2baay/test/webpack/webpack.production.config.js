@@ -1,10 +1,10 @@
-const path = require("path")
-const webpack = require("webpack")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const CleanWebpackPlugin = require("clean-webpack-plugin")
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 
 module.exports = {
   //设置环境模式为开发，业务逻辑通过process.env.NODE_ENV获取当前的运行环境
@@ -14,7 +14,7 @@ module.exports = {
 
   devtool: "source-map",
   //入口文件
-  entry: ["@babel/polyfill",path.resolve(__dirname, "../app/index.js")],
+  entry: ["@babel/polyfill", path.resolve(__dirname, "../app/index.js")],
   //开发时，打包后文件
   output: {
     path: path.resolve(__dirname, "../build"),
@@ -39,7 +39,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader",
@@ -47,14 +47,14 @@ module.exports = {
               sourceMap: true
             }
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
         test: /\.less$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader", // translates CSS into CommonJS
@@ -68,14 +68,14 @@ module.exports = {
               sourceMap: true
             }
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
         test: /\.scss$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader", // translates CSS into CommonJS
@@ -89,7 +89,7 @@ module.exports = {
               sourceMap: true
             }
           },
-          'postcss-loader'
+          "postcss-loader"
         ]
       },
       {
@@ -105,25 +105,27 @@ module.exports = {
           {
             loader: "image-webpack-loader",
             options: {
+              bypassOnDebug: true, // webpack@1.x
+              disable: true, // webpack@2.x and newer
               mozjpeg: {
-               progressive: true,
-               quality: 65
-             },
-             // optipng.enabled: false will disable optipng
-             optipng: {
-               enabled: false,
-             },
-             pngquant: {
-               quality: '65-90',
-               speed: 4
-             },
-             gifsicle: {
-               interlaced: false,
-             },
-             // the webp option will enable WEBP
-             webp: {
-               quality: 75
-             }
+                progressive: true,
+                quality: 65
+              },
+              // optipng.enabled: false will disable optipng
+              optipng: {
+                enabled: false
+              },
+              pngquant: {
+                quality: "65-90",
+                speed: 4
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              // the webp option will enable WEBP
+              webp: {
+                quality: 75
+              }
             }
           }
         ]
@@ -135,7 +137,7 @@ module.exports = {
           limit: 8192,
           name: "fonts/[name]-[hash:8].[ext]"
         }
-      },
+      }
     ]
   },
 
@@ -145,7 +147,6 @@ module.exports = {
   },
 
   plugins: [
-
     // webpack 内置的 banner-plugin
     new webpack.BannerPlugin("Copyright by 768188667@qq.com"),
 
@@ -176,8 +177,7 @@ module.exports = {
 
     new UglifyJsPlugin({
       sourceMap: true
-    }),
-
+    })
   ],
 
   optimization: {
@@ -219,5 +219,4 @@ module.exports = {
       new OptimizeCSSAssetsPlugin({})
     ]
   }
-
-}
+};
