@@ -25,3 +25,15 @@ export const callApiTest = () => dispatch => {
     dispatch
    })
 }
+
+//等同于
+// export const callApiTest = () => {
+//     return dispatch => {
+//         get({
+//         url: 'http://localhost:3004/callAPiTest',
+//         success: CALL_API_TEST_SUCCESS,
+//         failure: CALL_API_TEST_FAILURE,
+//         dispatch
+//         })
+//     }
+// }
