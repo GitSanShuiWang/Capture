@@ -1,6 +1,6 @@
-.text{
+:local(.text){
     background: blue;
 }
-.v{
+:local(.v){
   color: red;
 }

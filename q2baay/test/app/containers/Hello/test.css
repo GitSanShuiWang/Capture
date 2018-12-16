@@ -1,6 +1,8 @@
-p{
+:local(p){
   color: red;
 }
-.content-flex{
+:local(.content-flex){
   display: flex;
 }
+
+

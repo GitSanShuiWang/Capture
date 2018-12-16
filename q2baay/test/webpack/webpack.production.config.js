@@ -44,6 +44,8 @@ module.exports = {
           {
             loader: "css-loader",
             options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
               sourceMap: true
             }
           },
@@ -59,6 +61,8 @@ module.exports = {
           {
             loader: "css-loader", // translates CSS into CommonJS
             options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
               sourceMap: true
             }
           },
@@ -80,6 +84,8 @@ module.exports = {
           {
             loader: "css-loader", // translates CSS into CommonJS
             options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]',
               sourceMap: true
             }
           },

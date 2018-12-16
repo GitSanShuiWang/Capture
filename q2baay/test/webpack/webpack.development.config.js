@@ -6,8 +6,8 @@ module.exports = {
   //设置环境模式为开发，业务逻辑通过process.env.NODE_ENV获取当前的运行环境
   mode: "development",
   //使用默认配置，README.md中有link说明
-  context: path.resolve(__dirname),
-  /*错误信息是不是提示的很详细,我们在srouce里面能看到我们写的代码，也能打断点调试哦~*/
+  context: path.resolve(__dirname),  
+  /*错误信息是不是提示的很详细,我们在source里面能看到我们写的代码，也能打断点调试哦~*/
   devtool: "inline-source-map",
   //入口文件
   entry: ["@babel/polyfill", path.resolve(__dirname, "../app/index.js")],
@@ -15,7 +15,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "../build"),
     filename: "js/[name].[hash:8].js", //dev---hash;production---chunkhash；和webpack-dev-server --hot不兼容
-    chunkFilename: "js/[name].[chunkhash:8].js"
+    chunkFilename: "demandJs/[name].[chunkhash:8].js"
   },
 
   module: {
@@ -38,7 +38,11 @@ module.exports = {
             loader: "style-loader"
           },
           {
-            loader: "css-loader"
+            loader: "css-loader",
+            options: {
+              modules: true,  // 开启css modules局部样式模块，防止样式覆盖。
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
           },
           "postcss-loader"
         ]
@@ -50,7 +54,11 @@ module.exports = {
             loader: "style-loader" // creates style nodes from JS strings
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader", // translates CSS into CommonJS
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
           },
           {
             loader: "less-loader" // compiles Less to CSS
@@ -62,13 +70,19 @@ module.exports = {
         test: /\.scss$/,
         use: [
           {
-            loader: "style-loader" // creates style nodes from JS strings
+            loader: "style-loader" // 将样式插入到dom标签
           },
           {
-            loader: "css-loader" // translates CSS into CommonJS
+            loader: "css-loader",
+            options: {
+              modules: true,
+              localIdentName: '[path][name]__[local]--[hash:base64:5]'
+            }
+            // css-loader使你能够使用类似@import和url（...）的方法实现require的功能
+            //style-loader将所有的计算后的样式加入页面中。二者组合在一起使你能够把样式表嵌入webpack打包后的js文件中加入html的head标签的style标签中。
           },
           {
-            loader: "sass-loader" // compiles Sass to CSS
+            loader: "sass-loader" //将 Sass 编译成 CSS
           },
           "postcss-loader"
         ]

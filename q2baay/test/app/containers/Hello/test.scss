@@ -1,4 +1,18 @@
-img{
+/*
+css modules 
+:local适合后边跟className,
+不建议单独Tag，依然会污染全局，不会生成带hash的后缀
+也不建议id，localIdentName可以使webpack携带查询参数，用id就不方便
+*/
+
+:local(img){
   width: 25%;
   height: auto;
+}
+
+:local(.text){
+  background: greenyellow;
+  span {
+    color: green;
+  }
 }

@@ -10,8 +10,9 @@ cross-env 使命令参数配置适用不同平台开发，统一结构
 1.设置mode属性所在的开发环境情况。
 
 2.设置context对entry和loader的路径影响[参考context说明](https://juejin.im/post/5a10d9fe51882554bd50a5d3)
+设置上下文中相对路径为当前文件夹下的当前文件
 
-3.babel 进行js,jsx的编译，谨记需配置.bablrc中的"presets":
+3.babel 进行js,jsx的编译，谨记需配置.babelrc中的"presets":
 "presets": ["@babel/preset-env", "@babel/preset-react","@babel/preset-stage-0"]
 ，使用env对react进行解析编译,stage-0使项目支持最新的提案。
 npm install ... --save-dev
@@ -179,7 +180,7 @@ optimization: {
 3.cacheGroups ->> styles 对指定的.css或.scss文件进行提取为公共的css
 4.router路由中不进行按需加载的组件，会把样式搞到main.000.css中
 5.按需加载的展示组件会生成一个组件name.hash的css文件
-5.css改变js文件的hash也会跟着变
+6.css改变js文件的hash也会跟着变
 
 
 五、优化缓存

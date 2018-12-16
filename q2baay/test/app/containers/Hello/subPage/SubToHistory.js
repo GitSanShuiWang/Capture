@@ -10,7 +10,10 @@ class SubToHistory extends React.Component {
 
   render() {
     return (
-      <button onClick={() => history.push("/Test")}>SubPage Test Page</button>
+      <div>
+        <button onClick={() => this.props.history.push("/Test")}>Test Page subPage -001</button>
+        <button onClick={() => history.push("/Test")}>SubPage Test Page</button>
+      </div>
     )
   }
 }
